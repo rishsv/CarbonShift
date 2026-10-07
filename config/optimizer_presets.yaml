@@ -1,0 +1,87 @@
+# Optimizer weight presets
+# Each preset defines the objective function weights.
+# alpha: carbon weight (dominant term)
+# beta: priority-weighted delay
+# gamma: lateness (effectively forbidden via BIGM — always 1_000_000)
+# delta: non-renewable energy weight
+# mu: migration cost weight
+# rho: checkpoint/resume overhead weight
+# tau: ToD tariff cost weight (optional)
+# eta_smooth: load-ramp smoothing weight
+# budget_penalty: daily carbon budget overage penalty
+
+presets:
+  carbon_first:
+    label: "Carbon First"
+    description: "Minimize carbon above all; delay is acceptable if deadline is met."
+    alpha: 100
+    beta: 1
+    gamma: 1000000
+    delta: 10
+    mu: 2
+    rho: 1
+    tau: 0
+    eta_smooth: 0
+    budget_penalty: 500
+
+  balanced:
+    label: "Balanced"
+    description: "Balance carbon reduction with reasonable job delay."
+    alpha: 60
+    beta: 10
+    gamma: 1000000
+    delta: 10
+    mu: 3
+    rho: 2
+    tau: 1
+    eta_smooth: 1
+    budget_penalty: 500
+
+  deadline_first:
+    label: "Deadline First"
+    description: "Minimize delay and lateness; carbon savings are secondary."
+    alpha: 30
+    beta: 40
+    gamma: 1000000
+    delta: 5
+    mu: 2
+    rho: 1
+    tau: 0
+    eta_smooth: 0
+    budget_penalty: 500
+
+# Default priority delay weights w_j (1..5 → delay cost multiplier)
+priority_delay_weights:
+  1: 1
+  2: 3
+  3: 10
+  4: 40
+  5: 1000
+
+# CP-SAT defaults
+solver_defaults:
+  max_time_seconds: 15
+  num_search_workers: 8  # capped to cpu_count at runtime
+  random_seed: 42
+  pin_critical: true  # Priority-5 jobs pinned to earliest feasible slot
+
+# Rolling horizon
+rolling_defaults:
+  chunk_hours: 12
+  replan_drift_threshold_pct: 15.0  # trigger replan if p50 shifts by this %
+  forecast_confidence_low_threshold: 25.0  # % residual spike
+
+# Risk
+default_risk_lambda: 0.3
+
+# Slot size
+slot_minutes: 60  # or 30
+
+# Runtime uncertainty for deadline safety buffer
+runtime_uncertainty_pct: 10.0  # % of duration slots added as buffer
+
+# Renewable share threshold for green-only jobs
+green_only_threshold: 0.35
+
+# Transfer energy for migration cost
+transfer_kwh_per_gb: 0.000006  # ~6 Wh/GB (data center interconnect estimate)

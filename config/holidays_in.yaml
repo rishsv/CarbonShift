@@ -1,0 +1,31 @@
+# Indian national holidays (fixed dates)
+# The `holidays` Python package (country='IN') handles most of these automatically.
+# This file lists fixed dates for offline use and twin demand-curve adjustments.
+# Source: Government of India gazette notifications (illustrative list).
+
+fixed_national_holidays:
+  - name: Republic Day
+    month: 1
+    day: 26
+  - name: Independence Day
+    month: 8
+    day: 15
+  - name: Gandhi Jayanti
+    month: 10
+    day: 2
+  - name: Christmas Day
+    month: 12
+    day: 25
+
+# Note: Diwali, Holi, Eid-ul-Fitr, Eid-ul-Adha, Good Friday, Dussehra, etc.
+# are moveable feasts and are handled by the `holidays` Python package at runtime.
+# holiday_demand_factor: 0.90 (10% demand reduction on national holidays)
+holiday_demand_factor: 0.90
+
+# Weekend demand factor (Saturday and Sunday)
+weekend_demand_factor: 0.93
+
+# Festival season: Oct-Nov typically sees elevated demand due to lighting (Diwali etc.)
+festival_demand_boost:
+  months: [10, 11]
+  factor: 1.03

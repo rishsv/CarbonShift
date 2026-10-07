@@ -1,0 +1,125 @@
+# Hardware power profiles — illustrative, derived from vendor datasheet TDPs.
+# VERIFY against current vendor datasheets before claiming accuracy.
+# idle_w: typical idle draw; max_w: TDP / peak draw.
+# cpu_node: 1 node = 32 cores for power calculation purposes.
+
+cpu_node:
+  idle_w: 120
+  max_w: 400
+  cores_per_node: 32
+  source_note: "Dual-socket server; illustrative. Actual varies with CPU model."
+
+gpu_types:
+  T4:
+    idle_w: 10
+    max_w: 70
+    vram_gb: 16
+    source_note: "NVIDIA T4 TDP 70W; idle ~10W. Tesla T4 datasheet."
+  V100:
+    idle_w: 40
+    max_w: 300
+    vram_gb: 32
+    source_note: "NVIDIA V100 SXM2 TDP 300W. PCIe variant ~250W."
+  A100:
+    idle_w: 50
+    max_w: 250
+    vram_gb: 80
+    source_note: "NVIDIA A100 PCIe 80GB TDP ~250W. SXM variant ~400W."
+  H100:
+    idle_w: 80
+    max_w: 700
+    vram_gb: 80
+    source_note: "NVIDIA H100 SXM5 TDP ~700W. PCIe variant ~350W."
+
+# Archetype-level defaults (resources, utilization, preemptible)
+archetypes:
+  ml_training:
+    gpu_count: 4
+    gpu_type: A100
+    cpu_cores: 8
+    utilization: 0.85
+    preemptible: true
+    max_interruptions: 2
+    typical_duration_h: 6.0
+    typical_flexibility_h: 12.0
+    checkpoint_overhead_pct: 0.02
+  ml_finetune:
+    gpu_count: 2
+    gpu_type: A100
+    cpu_cores: 8
+    utilization: 0.80
+    preemptible: true
+    max_interruptions: 2
+    typical_duration_h: 3.0
+    typical_flexibility_h: 8.0
+    checkpoint_overhead_pct: 0.02
+  batch_inference:
+    gpu_count: 2
+    gpu_type: T4
+    cpu_cores: 8
+    utilization: 0.70
+    preemptible: false
+    max_interruptions: 0
+    typical_duration_h: 2.0
+    typical_flexibility_h: 6.0
+    checkpoint_overhead_pct: 0.0
+  etl:
+    gpu_count: 0
+    gpu_type: null
+    cpu_cores: 32
+    utilization: 0.60
+    preemptible: false
+    max_interruptions: 0
+    typical_duration_h: 2.0
+    typical_flexibility_h: 6.0
+    checkpoint_overhead_pct: 0.0
+  render_transcode:
+    gpu_count: 1
+    gpu_type: T4
+    cpu_cores: 16
+    utilization: 0.90
+    preemptible: true
+    max_interruptions: 1
+    typical_duration_h: 4.0
+    typical_flexibility_h: 10.0
+    checkpoint_overhead_pct: 0.03
+  backup:
+    gpu_count: 0
+    gpu_type: null
+    cpu_cores: 8
+    utilization: 0.30
+    preemptible: true
+    max_interruptions: 3
+    typical_duration_h: 3.0
+    typical_flexibility_h: 20.0
+    checkpoint_overhead_pct: 0.01
+  simulation:
+    gpu_count: 0
+    gpu_type: null
+    cpu_cores: 64
+    utilization: 0.90
+    preemptible: false
+    max_interruptions: 0
+    typical_duration_h: 8.0
+    typical_flexibility_h: 8.0
+    checkpoint_overhead_pct: 0.0
+  ci_build:
+    gpu_count: 0
+    gpu_type: null
+    cpu_cores: 16
+    utilization: 0.70
+    preemptible: false
+    max_interruptions: 0
+    typical_duration_h: 0.5
+    typical_flexibility_h: 1.0
+    checkpoint_overhead_pct: 0.0
+  report:
+    gpu_count: 0
+    gpu_type: null
+    cpu_cores: 8
+    utilization: 0.50
+    preemptible: false
+    max_interruptions: 0
+    typical_duration_h: 1.0
+    typical_flexibility_h: 4.0
+    checkpoint_overhead_pct: 0.0

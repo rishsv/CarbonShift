@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 5%;
+    --foreground: 210 30% 96%;
+
+    --card: 220 20% 8%;
+    --card-foreground: 210 30% 96%;
+
+    --popover: 220 20% 8%;
+    --popover-foreground: 210 30% 96%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 220 20% 5%;
+
+    --secondary: 220 15% 14%;
+    --secondary-foreground: 210 30% 96%;
+
+    --muted: 220 15% 14%;
+    --muted-foreground: 220 10% 50%;
+
+    --accent: 220 15% 16%;
+    --accent-foreground: 210 30% 96%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 210 30% 96%;
+
+    --border: 220 15% 14%;
+    --input: 220 15% 11%;
+    --ring: 142 76% 36%;
+
+    --chart-1: 142 76% 45%;   /* Emerald green */
+    --chart-2: 217 91% 60%;   /* Blue */
+    --chart-3: 43 96% 56%;    /* Amber */
+    --chart-4: 270 71% 65%;   /* Purple */
+    --chart-5: 0 84% 62%;     /* Red */
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+  select, input, textarea {
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--input));
+  }
+  option {
+    background-color: hsl(var(--card));
+  }
+}
+
+@layer components {
+  .card-glow {
+    box-shadow: 0 0 0 1px hsl(var(--border)),
+                0 4px 24px -4px rgba(0,0,0,0.4);
+  }
+  .badge-green {
+    @apply text-xs font-bold px-2 py-0.5 rounded-full;
+    background: hsl(142 76% 36% / 0.15);
+    color: hsl(142 76% 55%);
+    border: 1px solid hsl(142 76% 36% / 0.3);
+  }
+  .badge-red {
+    @apply text-xs font-bold px-2 py-0.5 rounded-full;
+    background: hsl(0 62% 45% / 0.15);
+    color: hsl(0 84% 62%);
+    border: 1px solid hsl(0 62% 45% / 0.3);
+  }
+  .badge-blue {
+    @apply text-xs font-bold px-2 py-0.5 rounded-full;
+    background: hsl(217 91% 60% / 0.15);
+    color: hsl(217 91% 75%);
+    border: 1px solid hsl(217 91% 60% / 0.3);
+  }
+  .btn-primary {
+    @apply flex items-center gap-2 px-5 py-2.5 font-bold rounded-xl transition-all text-sm;
+    background: hsl(var(--chart-1));
+    color: hsl(220 20% 5%);
+    box-shadow: 0 4px 16px hsl(var(--chart-1) / 0.3);
+  }
+  .btn-primary:hover {
+    background: hsl(142 76% 50%);
+    box-shadow: 0 4px 24px hsl(var(--chart-1) / 0.5);
+    transform: translateY(-1px);
+  }
+  .btn-primary:disabled {
+    opacity: 0.5;
+    transform: none;
+    box-shadow: none;
+  }
+  .btn-secondary {
+    @apply flex items-center gap-2 px-4 py-2 font-medium rounded-xl border border-border text-sm hover:bg-muted transition-all;
+  }
+  .stat-card {
+    @apply relative overflow-hidden bg-card border border-border rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all;
+  }
+  .page-header {
+    @apply mb-8;
+  }
+  .page-header h1 {
+    @apply text-3xl font-black tracking-tight;
+  }
+  .page-header p {
+    @apply text-muted-foreground mt-1;
+  }
+}

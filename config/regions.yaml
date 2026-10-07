@@ -1,0 +1,253 @@
+# Regional Grid Digital Twin parameters — illustrative placeholder values.
+# CALIBRATE from CEA/MNRE installed capacity reports and Grid-India RLDC data.
+# All capacities in GW unless noted.
+# Source: Illustrative; based on publicly available CEA/MNRE order-of-magnitude data.
+
+regions:
+  NR:
+    name: Northern Region
+    description: "Large demand, coal + hydro, growing solar (Rajasthan). Strong winter/summer swings."
+    representative_lat: 28.54
+    representative_lon: 77.39
+
+    # Installed capacity (GW) — illustrative; verify from CEA annual report
+    installed_capacity_gw:
+      solar: 28.0
+      wind: 6.0
+      hydro: 20.0
+      nuclear: 2.0
+      thermal: 95.0
+      other: 3.0
+
+    peak_demand_gw: 95.0
+    temp_sensitivity_pct_per_c: 1.8  # % demand increase per °C above 26°C
+
+    # Monthly seasonal demand factor (Jan=0, Dec=11)
+    seasonal_factor:
+      - 0.95  # Jan (winter heating + festivals)
+      - 0.90  # Feb
+      - 0.88  # Mar
+      - 0.92  # Apr
+      - 0.98  # May (summer AC peak)
+      - 0.93  # Jun
+      - 0.90  # Jul
+      - 0.90  # Aug
+      - 0.88  # Sep
+      - 0.87  # Oct
+      - 0.90  # Nov
+      - 0.95  # Dec
+
+    # Monthly hydro capacity factor (Jan=0, Dec=11)
+    hydro_cf_by_month:
+      - 0.45  # Jan (low snowmelt)
+      - 0.40  # Feb
+      - 0.45  # Mar
+      - 0.50  # Apr
+      - 0.55  # May (snowmelt begins)
+      - 0.65  # Jun (monsoon + snowmelt)
+      - 0.80  # Jul (peak monsoon)
+      - 0.85  # Aug
+      - 0.75  # Sep
+      - 0.60  # Oct
+      - 0.50  # Nov
+      - 0.45  # Dec
+
+    gas_share_thermal: 0.04  # Small gas share in thermal
+    import_share: 0.05       # Net inter-region import fraction (simplification)
+
+  WR:
+    name: Western Region
+    description: "Industrial demand, large solar (Rajasthan/Gujarat) and wind (Gujarat/Maharashtra)."
+    representative_lat: 19.08
+    representative_lon: 72.88
+
+    installed_capacity_gw:
+      solar: 30.0
+      wind: 22.0
+      hydro: 8.0
+      nuclear: 3.0
+      thermal: 100.0
+      other: 3.0
+
+    peak_demand_gw: 80.0
+    temp_sensitivity_pct_per_c: 1.5
+
+    seasonal_factor:
+      - 0.88  # Jan
+      - 0.85  # Feb
+      - 0.88  # Mar
+      - 0.93  # Apr
+      - 0.98  # May
+      - 0.95  # Jun (monsoon onset, demand softens slightly)
+      - 0.92  # Jul
+      - 0.92  # Aug
+      - 0.90  # Sep
+      - 0.88  # Oct
+      - 0.87  # Nov
+      - 0.88  # Dec
+
+    hydro_cf_by_month:
+      - 0.30  # Jan
+      - 0.28  # Feb
+      - 0.30  # Mar
+      - 0.35  # Apr
+      - 0.40  # May
+      - 0.55  # Jun
+      - 0.75  # Jul
+      - 0.80  # Aug
+      - 0.70  # Sep
+      - 0.50  # Oct
+      - 0.38  # Nov
+      - 0.32  # Dec
+
+    gas_share_thermal: 0.08
+    import_share: 0.03
+
+  SR:
+    name: Southern Region
+    description: "Strong wind and solar, significant hydro, high renewable share on good days."
+    representative_lat: 13.08
+    representative_lon: 80.27
+
+    installed_capacity_gw:
+      solar: 38.0
+      wind: 26.0
+      hydro: 12.0
+      nuclear: 3.0
+      thermal: 55.0
+      other: 4.0
+
+    peak_demand_gw: 70.0
+    temp_sensitivity_pct_per_c: 2.0  # High AC load in TN/AP/Telangana
+
+    seasonal_factor:
+      - 0.90  # Jan
+      - 0.87  # Feb
+      - 0.90  # Mar
+      - 0.96  # Apr (pre-monsoon heat)
+      - 1.00  # May (peak summer)
+      - 0.97  # Jun
+      - 0.95  # Jul (SW monsoon, cooler)
+      - 0.95  # Aug
+      - 0.93  # Sep
+      - 0.90  # Oct (NE monsoon begins)
+      - 0.90  # Nov
+      - 0.91  # Dec
+
+    hydro_cf_by_month:
+      - 0.50  # Jan
+      - 0.45  # Feb
+      - 0.40  # Mar
+      - 0.38  # Apr (pre-monsoon low)
+      - 0.40  # May
+      - 0.55  # Jun (SW monsoon)
+      - 0.70  # Jul
+      - 0.75  # Aug
+      - 0.70  # Sep
+      - 0.65  # Oct (NE monsoon)
+      - 0.60  # Nov
+      - 0.55  # Dec
+
+    gas_share_thermal: 0.10
+    import_share: 0.02
+
+    # SW monsoon wind boost (Jun-Sep) for SR — additional CF multiplier
+    wind_monsoon_boost:
+      months: [6, 7, 8, 9]  # 1-indexed
+      multiplier: 1.35
+
+  ER:
+    name: Eastern Region
+    description: "Coal-heavy, hydro (Himalayan rivers), lower solar, Kolkata anchor."
+    representative_lat: 22.57
+    representative_lon: 88.36
+
+    installed_capacity_gw:
+      solar: 5.0
+      wind: 0.1
+      hydro: 6.0
+      nuclear: 0.0
+      thermal: 40.0
+      other: 1.0
+
+    peak_demand_gw: 38.0
+    temp_sensitivity_pct_per_c: 1.6
+
+    seasonal_factor:
+      - 0.88  # Jan
+      - 0.85  # Feb
+      - 0.90  # Mar
+      - 0.95  # Apr
+      - 1.00  # May (hot, high AC)
+      - 0.97  # Jun
+      - 0.95  # Jul
+      - 0.95  # Aug
+      - 0.93  # Sep
+      - 0.88  # Oct
+      - 0.87  # Nov
+      - 0.88  # Dec
+
+    hydro_cf_by_month:
+      - 0.35  # Jan
+      - 0.32  # Feb
+      - 0.35  # Mar
+      - 0.40  # Apr
+      - 0.45  # May
+      - 0.65  # Jun
+      - 0.80  # Jul
+      - 0.85  # Aug
+      - 0.75  # Sep
+      - 0.55  # Oct
+      - 0.42  # Nov
+      - 0.37  # Dec
+
+    gas_share_thermal: 0.02
+    import_share: -0.02  # Slight net exporter
+
+  NER:
+    name: North-Eastern Region
+    description: "Small grid, hydro-dominated, limited solar/wind, isolated characteristics."
+    representative_lat: 26.14
+    representative_lon: 91.74
+
+    installed_capacity_gw:
+      solar: 0.5
+      wind: 0.0
+      hydro: 2.0
+      nuclear: 0.0
+      thermal: 1.5
+      other: 0.2
+
+    peak_demand_gw: 5.0
+    temp_sensitivity_pct_per_c: 1.2
+
+    seasonal_factor:
+      - 0.88  # Jan
+      - 0.85  # Feb
+      - 0.90  # Mar
+      - 0.95  # Apr
+      - 0.97  # May
+      - 0.97  # Jun
+      - 0.95  # Jul
+      - 0.95  # Aug
+      - 0.93  # Sep
+      - 0.88  # Oct
+      - 0.87  # Nov
+      - 0.88  # Dec
+
+    hydro_cf_by_month:
+      - 0.40  # Jan
+      - 0.38  # Feb
+      - 0.42  # Mar
+      - 0.48  # Apr
+      - 0.55  # May
+      - 0.72  # Jun (heavy monsoon)
+      - 0.85  # Jul
+      - 0.88  # Aug
+      - 0.78  # Sep
+      - 0.60  # Oct
+      - 0.48  # Nov
+      - 0.43  # Dec
+
+    gas_share_thermal: 0.05
+    import_share: 0.10  # NER imports significantly

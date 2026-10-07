@@ -1,0 +1,43 @@
+# Emission factors (gCO2e/kWh) — illustrative defaults
+# VERIFY against current CEA CO2 Baseline Database and IPCC AR6 before final demo.
+# Source notes: CEA "CO2 Baseline Database for the Indian Power Sector" (latest edition),
+# IPCC AR6 lifecycle GHG emission factors where noted.
+# These are lifecycle (construction + operation) figures except where noted.
+
+calibration_target_national_ci: 710
+# Set to the latest CEA published grid emission factor (operational, gCO2e/kWh).
+# Default 710 is illustrative; verify from: https://cea.nic.in/
+
+sources:
+  coal:
+    gco2e_per_kwh: 950
+    source_note: "Operational + lifecycle; Indian coal average. CEA publishes plant-level data."
+    uncertainty_pct: 8
+  gas:
+    gco2e_per_kwh: 490
+    source_note: "CCGT average; IPCC AR6 lifecycle median ~490."
+    uncertainty_pct: 10
+  biomass:
+    gco2e_per_kwh: 230
+    source_note: "Highly variable; illustrative average. Verify against feedstock."
+    uncertainty_pct: 30
+  solar:
+    gco2e_per_kwh: 45
+    source_note: "IPCC AR6 lifecycle median ~48, Indian conditions ~40-50."
+    uncertainty_pct: 20
+  wind:
+    gco2e_per_kwh: 12
+    source_note: "IPCC AR6 lifecycle median ~11-12."
+    uncertainty_pct: 20
+  hydro:
+    gco2e_per_kwh: 24
+    source_note: "IPCC AR6 lifecycle median; varies with reservoir type."
+    uncertainty_pct: 40
+  nuclear:
+    gco2e_per_kwh: 12
+    source_note: "IPCC AR6 lifecycle median ~12."
+    uncertainty_pct: 15
+  other:
+    gco2e_per_kwh: 400
+    source_note: "Mixture of diesel backup, biomass co-firing; conservative estimate."
+    uncertainty_pct: 30

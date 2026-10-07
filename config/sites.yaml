@@ -1,0 +1,118 @@
+# Sites configuration — illustrative capacities; verify against actual DC specs.
+# GPU capacity modelled per GPU type pool (A100, V100, T4, H100).
+# CPU capacity modelled as cores.
+# data_source: "sites.yaml v1.0 — illustrative placeholder values"
+
+sites:
+  - id: chn-1
+    name: Chennai DC
+    region: SR
+    lat: 13.08
+    lon: 80.27
+    gpu_capacity:
+      A100: 16
+      V100: 8
+      T4: 8
+      H100: 0
+    cpu_cores: 2048
+    power_cap_kw: 120
+    pue_base: 1.45
+    pue_k: 0.015
+    pue_temp_limit_c: 24
+    allowed_classes:
+      - public
+      - internal
+      - restricted
+    home_region: SR
+    notes: "Hot climate; PUE rises significantly in summer. Strong solar access."
+    maintenance_blackouts: []
+
+  - id: mum-1
+    name: Mumbai DC
+    region: WR
+    lat: 19.08
+    lon: 72.88
+    gpu_capacity:
+      A100: 8
+      V100: 8
+      T4: 8
+      H100: 0
+    cpu_cores: 3072
+    power_cap_kw: 140
+    pue_base: 1.35
+    pue_k: 0.012
+    pue_temp_limit_c: 24
+    allowed_classes:
+      - public
+      - internal
+      - restricted
+    home_region: WR
+    notes: "Mixed CPU/GPU. High humidity; evaporative cooling effective."
+    maintenance_blackouts: []
+
+  - id: hyd-1
+    name: Hyderabad DC
+    region: SR
+    lat: 17.38
+    lon: 78.48
+    gpu_capacity:
+      A100: 8
+      V100: 8
+      T4: 8
+      H100: 0
+    cpu_cores: 2048
+    power_cap_kw: 100
+    pue_base: 1.38
+    pue_k: 0.012
+    pue_temp_limit_c: 24
+    allowed_classes:
+      - public
+      - internal
+      - restricted
+    home_region: SR
+    notes: "Same SR grid as Chennai but different weather (Deccan Plateau). Weather diversity demo."
+    maintenance_blackouts: []
+
+  - id: nda-1
+    name: Noida DC
+    region: NR
+    lat: 28.54
+    lon: 77.39
+    gpu_capacity:
+      A100: 0
+      V100: 4
+      T4: 4
+      H100: 0
+    cpu_cores: 4096
+    power_cap_kw: 110
+    pue_base: 1.35
+    pue_k: 0.012
+    pue_temp_limit_c: 24
+    allowed_classes:
+      - public
+      - internal
+    home_region: NR
+    notes: "CPU-heavy; limited GPU (V100/T4 only, no A100). High summer temperatures affect PUE."
+    maintenance_blackouts: []
+
+  - id: kol-1
+    name: Kolkata DC
+    region: ER
+    lat: 22.57
+    lon: 88.36
+    gpu_capacity:
+      A100: 0
+      V100: 4
+      T4: 4
+      H100: 0
+    cpu_cores: 1024
+    power_cap_kw: 60
+    pue_base: 1.38
+    pue_k: 0.013
+    pue_temp_limit_c: 24
+    allowed_classes:
+      - public
+      - internal
+    home_region: ER
+    notes: "Smallest site. Coal-heavy ER grid. High humidity; monsoon heavy."
+    maintenance_blackouts: []

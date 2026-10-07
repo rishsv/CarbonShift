@@ -1,0 +1,26 @@
+# Carbon equivalents for Impact page — ILLUSTRATIVE values.
+# These conversions are approximate; vary by study, year and geography.
+# Always show source and label as illustrative in the UI.
+
+disclaimer: "Illustrative equivalents. Actual values vary by study, vehicle type and tree species."
+
+km_per_kg_co2:
+  value: 4.8
+  label: "km driven (avg petrol car)"
+  source_note: "Based on ~0.21 kgCO2/km for an average petrol car. European Environment Agency figures; Indian vehicles may differ."
+
+tree_kg_co2_per_year:
+  value: 21.0
+  label: "tree-years of carbon absorption"
+  source_note: "Average mature tree absorbs ~21 kg CO2/year. Varies widely by species, climate, age."
+
+# Additional equivalents (optional)
+smartphone_charges_per_kg_co2:
+  value: 121.0
+  label: "smartphone charges"
+  source_note: "~8.2g CO2 per charge of a typical smartphone battery (~12Wh at ~0.7 kgCO2/kWh)."
+
+flights_per_tonne_co2:
+  value: 0.5
+  label: "economy flights (London–Mumbai)"
+  source_note: "~2 tonnes CO2e per economy seat LHR-BOM roundtrip. Illustrative."
