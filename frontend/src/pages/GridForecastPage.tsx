@@ -3,6 +3,7 @@ import { fetchForecast, fetchForecastAccuracy } from '../api';
 import {
   ComposedChart, Area, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine
 } from 'recharts';
+import { Beaker, PlugZapping } from 'lucide-react';
 
 const REGIONS = ['NR', 'WR', 'SR', 'ER', 'NER'];
 const REGION_NAMES: Record<string, string> = {
@@ -116,8 +117,8 @@ export default function GridForecastPage() {
           <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">
             Carbon Intensity Forecast — {region} · {REGION_NAMES[region]}
           </h3>
-          <span className="text-xs bg-muted px-2 py-1 rounded-full text-muted-foreground">
-            🧪 Grid Digital Twin · Estimated
+          <span className="flex items-center gap-1 text-xs bg-muted px-2 py-1 rounded-full text-muted-foreground">
+            <Beaker className="w-3 h-3" /> Grid Digital Twin · Estimated
           </span>
         </div>
         {loading ? (
@@ -165,19 +166,23 @@ export default function GridForecastPage() {
         </div>
         <div className="bg-card border border-border rounded-xl p-5">
           <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-3">Data Source</h3>
-          <div className="space-y-2 text-sm">
-            <div className="flex items-start gap-2">
-              <span className="text-amber-400 mt-0.5">🧪</span>
+          <div className="space-y-4 text-sm mt-3">
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-amber-500/10 rounded-lg text-amber-500 mt-0.5">
+                <Beaker className="w-4 h-4" />
+              </div>
               <div>
-                <p className="font-medium">Grid Digital Twin (Tier C)</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Physics-informed model calibrated to CEA baseline emission factors (~710 gCO₂/kWh national average). Solar, wind, hydro, and thermal dispatch modeled from weather data.</p>
+                <p className="font-medium text-foreground">Grid Digital Twin</p>
+                <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">Physics-informed model calibrated to CEA baseline emission factors (~710 gCO₂/kWh national average). Solar, wind, hydro, and thermal dispatch modeled from weather data.</p>
               </div>
             </div>
-            <div className="flex items-start gap-2 opacity-40">
-              <span className="mt-0.5">🔌</span>
+            <div className="flex items-start gap-3 opacity-60">
+              <div className="p-2 bg-blue-500/10 rounded-lg text-blue-500 mt-0.5">
+                <PlugZapping className="w-4 h-4" />
+              </div>
               <div>
-                <p className="font-medium">Electricity Maps API (Tier A)</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Set ELECTRICITYMAPS_TOKEN in .env to enable real-time data.</p>
+                <p className="font-medium text-foreground">Grid-India API & Electricity Maps</p>
+                <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">Live data powered by Grid Controller of India Ltd. and Electricity Maps. Active when token is configured.</p>
               </div>
             </div>
           </div>

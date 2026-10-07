@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Download, Leaf, Zap, Clock, TrendingDown, Award, BarChart3 } from 'lucide-react';
+import { Download, Leaf, Zap, Clock, TrendingDown, Award, BarChart3, TreePine, Car, Smartphone, Recycle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 function EquivCard({ icon: Icon, label, value, color }: any) {
@@ -91,21 +91,21 @@ export default function ImpactLedger({ metrics, runs }: any) {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex items-center gap-4">
-            <div className="text-5xl">🌳</div>
+            <div className="text-chart-1 opacity-80"><TreePine className="w-12 h-12" /></div>
             <div>
               <p className="text-3xl font-black text-chart-1">{treeDays}</p>
               <p className="text-sm text-muted-foreground">Tree-days of carbon absorption</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <div className="text-5xl">🚗</div>
+            <div className="text-chart-2 opacity-80"><Car className="w-12 h-12" /></div>
             <div>
               <p className="text-3xl font-black text-chart-2">{Number(kmDriven).toLocaleString('en-IN')}</p>
               <p className="text-sm text-muted-foreground">km not driven (petrol car)</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <div className="text-5xl">📱</div>
+            <div className="text-chart-4 opacity-80"><Smartphone className="w-12 h-12" /></div>
             <div>
               <p className="text-3xl font-black text-chart-4">{Number(smartphoneCharges).toLocaleString('en-IN')}</p>
               <p className="text-sm text-muted-foreground">smartphone charges powered</p>
@@ -124,8 +124,10 @@ export default function ImpactLedger({ metrics, runs }: any) {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                {['Run ID', 'Strategy', 'Planned CO₂', 'Saved CO₂', 'Savings %', '♻️ Share', 'SLA'].map(h => (
-                  <th key={h} className="text-left px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">{h}</th>
+                {['Run ID', 'Strategy', 'Planned CO₂', 'Saved CO₂', 'Savings %', 'RE Share', 'SLA'].map(h => (
+                  <th key={h} className="text-left px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    {h === 'RE Share' ? <span className="flex items-center gap-1"><Recycle className="w-3 h-3" /> RE Share</span> : h}
+                  </th>
                 ))}
               </tr>
             </thead>

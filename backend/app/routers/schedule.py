@@ -180,7 +180,7 @@ def _build_summary(run: ScheduleRun, session: Session, include_items: bool = Tru
     
     # Rebuild constraints if missing
     if not status_checks:
-        status_checks = [ConstraintStatus(constraint="?", label="Unknown", passed=True)]
+        status_checks = [{"constraint": "?", "label": "Unknown", "passed": True}]
 
     return ScheduleRunSummary(
         run_id=run.id,
